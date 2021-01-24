@@ -1,0 +1,32 @@
+﻿<Window x:Class="KeyViewer.KeyViewerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KeyViewer"
+        mc:Ignorable="d"
+        Title="Key Viewer" SizeToContent="WidthAndHeight" AllowsTransparency="True" WindowStyle="None" Topmost="True">
+    <Window.Background>
+        <SolidColorBrush Color="Black" Opacity="0.01" />
+    </Window.Background>
+
+    <ItemsControl ItemsSource="{Binding KeyModels}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal"
+                        x:Name="stackPanel">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type local:KeyView}">
+                            <Setter Property="Margin" Value="10,0,0,0"/>
+                        </Style>
+                    </StackPanel.Resources>
+                </StackPanel>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <local:KeyView Key="{Binding Key}" Fill="{Binding Fill}" Outline="{Binding Outline}" FontForeground="{Binding FontForeground}"/>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</Window>
