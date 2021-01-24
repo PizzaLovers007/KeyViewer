@@ -1,6 +1,6 @@
 # KeyViewer
 
-An easily configurable and always-on-top overlay showing when keys are pressed. Very useful for rhythm games!
+An easily configurable and always-on-top overlay showing when keys are pressed, made for rhythm games.
 
 ![Example 1](./Images/example1.png)
 ![Example 2](./Images/example2.png)

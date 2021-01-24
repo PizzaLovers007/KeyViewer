@@ -7,10 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyViewer", "KeyViewer\KeyV
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F3A73D46-BA67-45BF-8F87-A8EE71E7A807}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		make_release.bat = make_release.bat
 		README.md = README.md
+		VERSION.txt = VERSION.txt
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{F2A6419C-B5B2-45D6-BEE6-E38F5AEBAB7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,9 +26,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{F2A6419C-B5B2-45D6-BEE6-E38F5AEBAB7D} = {F3A73D46-BA67-45BF-8F87-A8EE71E7A807}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {023417F4-2FBB-4658-A866-28CC6556ADEB}
