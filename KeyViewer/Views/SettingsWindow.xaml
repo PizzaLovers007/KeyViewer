@@ -113,7 +113,7 @@
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    Margin="0,60,0,0" />
-            <Label Content="Inactive Fill Color:"
+            <Label Content="Inactive Outline Color:"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    Margin="0,90,0,0" />
