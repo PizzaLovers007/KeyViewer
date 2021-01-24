@@ -3,6 +3,9 @@
 An easily configurable and always-on-top overlay showing when keys are pressed, made for rhythm games.
 
 ![Example 1](./Images/example1.png)
+
+The overlay in action with the game [A Dance of Fire and Ice](https://store.steampowered.com/app/977950/A_Dance_of_Fire_and_Ice/).
+
 ![Example 2](./Images/example2.png)
 
 ## Installation
