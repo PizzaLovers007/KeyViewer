@@ -17,7 +17,7 @@
                         x:Name="stackPanel">
                     <StackPanel.Resources>
                         <Style TargetType="{x:Type local:KeyView}">
-                            <Setter Property="Margin" Value="10,0,0,0"/>
+                            <Setter Property="Margin" Value="10,0,0,0" />
                         </Style>
                     </StackPanel.Resources>
                 </StackPanel>
@@ -25,7 +25,7 @@
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <local:KeyView Key="{Binding Key}" Fill="{Binding Fill}" Outline="{Binding Outline}" FontForeground="{Binding FontForeground}"/>
+                <local:KeyView Key="{Binding Key}" Fill="{Binding Fill}" Outline="{Binding Outline}" FontForeground="{Binding FontForeground}" />
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>

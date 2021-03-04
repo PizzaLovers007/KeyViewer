@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using System.Windows.Media;
 
 namespace KeyViewer
@@ -13,23 +6,22 @@ namespace KeyViewer
     public class KeyModel : BaseNotifyPropertyChanged
     {
         #region Properties
+
         private Key key;
-        public Key Key
-        {
+
+        public Key Key {
             get { return key; }
-            set
-            {
+            set {
                 key = value;
                 OnPropertyChanged();
             }
         }
 
         private bool isPressed;
-        public bool IsPressed
-        {
+
+        public bool IsPressed {
             get { return isPressed; }
-            set
-            {
+            set {
                 isPressed = value;
                 OnPropertyChanged();
                 OnPropertyChanged("Fill");
@@ -39,11 +31,10 @@ namespace KeyViewer
         }
 
         private Brush pressedFill;
-        public Brush PressedFill
-        {
+
+        public Brush PressedFill {
             get { return pressedFill; }
-            set
-            {
+            set {
                 pressedFill = value;
                 OnPropertyChanged();
                 OnPropertyChanged("Fill");
@@ -51,11 +42,10 @@ namespace KeyViewer
         }
 
         private Brush releasedFill;
-        public Brush ReleasedFill
-        {
+
+        public Brush ReleasedFill {
             get { return releasedFill; }
-            set
-            {
+            set {
                 releasedFill = value;
                 OnPropertyChanged();
                 OnPropertyChanged("Fill");
@@ -63,11 +53,10 @@ namespace KeyViewer
         }
 
         private Brush pressedOutline;
-        public Brush PressedOutline
-        {
+
+        public Brush PressedOutline {
             get { return pressedOutline; }
-            set
-            {
+            set {
                 pressedOutline = value;
                 OnPropertyChanged();
                 OnPropertyChanged("Outline");
@@ -75,11 +64,10 @@ namespace KeyViewer
         }
 
         private Brush releasedOutline;
-        public Brush ReleasedOutline
-        {
+
+        public Brush ReleasedOutline {
             get { return releasedOutline; }
-            set
-            {
+            set {
                 releasedOutline = value;
                 OnPropertyChanged();
                 OnPropertyChanged("Outline");
@@ -87,11 +75,10 @@ namespace KeyViewer
         }
 
         private Brush pressedFontForeground;
-        public Brush PressedFontForeground
-        {
+
+        public Brush PressedFontForeground {
             get { return pressedFontForeground; }
-            set
-            {
+            set {
                 pressedFontForeground = value;
                 OnPropertyChanged();
                 OnPropertyChanged("FontForeground");
@@ -99,11 +86,10 @@ namespace KeyViewer
         }
 
         private Brush releasedFontForeground;
-        public Brush ReleasedFontForeground
-        {
+
+        public Brush ReleasedFontForeground {
             get { return releasedFontForeground; }
-            set
-            {
+            set {
                 releasedFontForeground = value;
                 OnPropertyChanged();
                 OnPropertyChanged("FontForeground");
@@ -111,24 +97,21 @@ namespace KeyViewer
         }
 
         public Brush Fill { get { return IsPressed ? PressedFill : ReleasedFill; } }
-        public Brush Outline { get { return IsPressed ? PressedOutline: ReleasedOutline; } }
+        public Brush Outline { get { return IsPressed ? PressedOutline : ReleasedOutline; } }
         public Brush FontForeground { get { return IsPressed ? PressedFontForeground : ReleasedFontForeground; } }
 
-        public string KeyString
-		{
-			get
-			{
-				if (Constants.KEY_TO_STRING.ContainsKey(key)) {
-					return Constants.KEY_TO_STRING[key];
-				}
-				return key.ToString();
-			}
-		}
+        public string KeyString {
+            get {
+                if (Constants.KEY_TO_STRING.ContainsKey(key)) {
+                    return Constants.KEY_TO_STRING[key];
+                }
+                return key.ToString();
+            }
+        }
 
-        #endregion
+        #endregion Properties
 
-        public KeyModel()
-        {
+        public KeyModel() {
             PressedFill = Constants.DefaultPressedFill;
             ReleasedFill = Constants.DefaultReleasedFill;
             PressedOutline = Constants.DefaultPressedOutline;
@@ -137,14 +120,12 @@ namespace KeyViewer
             ReleasedFontForeground = Constants.DefaultReleasedFontForeground;
         }
 
-        public override bool Equals(object obj)
-        {
+        public override bool Equals(object obj) {
             KeyModel other = obj as KeyModel;
             return other?.Key == Key;
         }
 
-        public override int GetHashCode()
-        {
+        public override int GetHashCode() {
             return Key.GetHashCode();
         }
     }

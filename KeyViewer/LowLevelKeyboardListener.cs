@@ -28,6 +28,7 @@ namespace KeyViewer.Utils
         public delegate IntPtr LowLevelKeyboardProc(int nCode, IntPtr wParam, IntPtr lParam);
 
         public event EventHandler<KeyboardKeyArgs> KeyPressed;
+
         public event EventHandler<KeyboardKeyArgs> KeyReleased;
 
         private LowLevelKeyboardProc _proc;
@@ -38,71 +39,56 @@ namespace KeyViewer.Utils
         public bool IsHooked { get; private set; }
 
         private static LowLevelKeyboardListener listener;
-        public static LowLevelKeyboardListener Instance
-        {
-            get
-            {
-                if (listener == null)
-                {
+
+        public static LowLevelKeyboardListener Instance {
+            get {
+                if (listener == null) {
                     listener = new LowLevelKeyboardListener();
                 }
                 return listener;
             }
         }
 
-        LowLevelKeyboardListener()
-        {
+        private LowLevelKeyboardListener() {
             _proc = HookCallback;
             isDown = new bool[1000];
         }
 
-        public void HookKeyboard()
-        {
-            if (IsHooked)
-            {
+        public void HookKeyboard() {
+            if (IsHooked) {
                 return;
             }
             _hookID = SetHook(_proc);
             IsHooked = true;
         }
 
-        public void UnHookKeyboard()
-        {
-            if (!IsHooked)
-            {
+        public void UnHookKeyboard() {
+            if (!IsHooked) {
                 return;
             }
             UnhookWindowsHookEx(_hookID);
             IsHooked = false;
         }
 
-        public bool KeyIsPressed(Key key)
-        {
+        public bool KeyIsPressed(Key key) {
             return isDown[KeyInterop.VirtualKeyFromKey(key)];
         }
 
-        private IntPtr SetHook(LowLevelKeyboardProc proc)
-        {
+        private IntPtr SetHook(LowLevelKeyboardProc proc) {
             using (Process curProcess = Process.GetCurrentProcess())
-            using (ProcessModule curModule = curProcess.MainModule)
-            {
+            using (ProcessModule curModule = curProcess.MainModule) {
                 return SetWindowsHookEx(WH_KEYBOARD_LL, proc, GetModuleHandle(curModule.ModuleName), 0);
             }
         }
 
-        private IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
-        {
-            if (nCode >= 0)
-            {
+        private IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam) {
+            if (nCode >= 0) {
                 int vkCode = Marshal.ReadInt32(lParam);
 
-                if (wParam == (IntPtr)WM_KEYDOWN && !isDown[vkCode])
-                {
+                if (wParam == (IntPtr)WM_KEYDOWN && !isDown[vkCode]) {
                     isDown[vkCode] = true;
                     KeyPressed?.Invoke(this, new KeyboardKeyArgs(KeyInterop.KeyFromVirtualKey(vkCode)));
-                }
-                else if (wParam == (IntPtr)WM_KEYUP && isDown[vkCode])
-                {
+                } else if (wParam == (IntPtr)WM_KEYUP && isDown[vkCode]) {
                     isDown[vkCode] = false;
                     KeyReleased?.Invoke(this, new KeyboardKeyArgs(KeyInterop.KeyFromVirtualKey(vkCode)));
                 }
@@ -116,8 +102,7 @@ namespace KeyViewer.Utils
     {
         public Key Key { get; private set; }
 
-        public KeyboardKeyArgs(Key key)
-        {
+        public KeyboardKeyArgs(Key key) {
             Key = key;
         }
     }

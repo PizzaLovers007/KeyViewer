@@ -23,8 +23,7 @@ namespace KeyViewer
         /// <summary>
         /// Perform some setup before the app starts
         /// </summary>
-        protected override void OnStartup(StartupEventArgs e)
-        {
+        protected override void OnStartup(StartupEventArgs e) {
             base.OnStartup(e);
 
             LowLevelKeyboardListener.Instance.HookKeyboard();
@@ -35,8 +34,7 @@ namespace KeyViewer
         /// <summary>
         /// Perform some teardown after the app ends
         /// </summary>
-        protected override void OnExit(ExitEventArgs e)
-        {
+        protected override void OnExit(ExitEventArgs e) {
             LowLevelKeyboardListener.Instance.UnHookKeyboard();
 
             SaveData();
@@ -44,26 +42,19 @@ namespace KeyViewer
             base.OnExit(e);
         }
 
-        private void LoadData()
-        {
-            try
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    if (!Directory.Exists(folderPath) || !File.Exists(settingsPath))
-                    {
+        private void LoadData() {
+            try {
+                Dispatcher.Invoke(() => {
+                    if (!Directory.Exists(folderPath) || !File.Exists(settingsPath)) {
                         return;
                     }
-                    using (StreamReader sr = new StreamReader(settingsPath))
-                    {
+                    using (StreamReader sr = new StreamReader(settingsPath)) {
                         BrushConverter brushConverter = new BrushConverter();
                         int numKeys = int.Parse(sr.ReadLine().Trim());
-                        for (int i = 0; i < numKeys; i++)
-                        {
+                        for (int i = 0; i < numKeys; i++) {
                             string line = sr.ReadLine();
                             string[] split = line.Split(',');
-                            KeyModelCollection.Instance.Add(new KeyModel
-                            {
+                            KeyModelCollection.Instance.Add(new KeyModel {
                                 Key = KeyInterop.KeyFromVirtualKey(int.Parse(split[0])),
                                 PressedFill = (Brush)brushConverter.ConvertFrom(split[1]),
                                 ReleasedFill = (Brush)brushConverter.ConvertFrom(split[2]),
@@ -78,9 +69,7 @@ namespace KeyViewer
                         Config.WindowY = position[1];
                     }
                 });
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 KeyModelCollection.Instance.Clear();
                 Config.WindowX = 50;
                 Config.WindowY = 50;
@@ -90,21 +79,15 @@ namespace KeyViewer
             }
         }
 
-        private void SaveData()
-        {
-            try
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    if (!Directory.Exists(folderPath))
-                    {
+        private void SaveData() {
+            try {
+                Dispatcher.Invoke(() => {
+                    if (!Directory.Exists(folderPath)) {
                         Directory.CreateDirectory(folderPath);
                     }
-                    using (StreamWriter sw = new StreamWriter(settingsPath))
-                    {
+                    using (StreamWriter sw = new StreamWriter(settingsPath)) {
                         sw.WriteLine(KeyModelCollection.Instance.Count);
-                        foreach (KeyModel model in KeyModelCollection.Instance)
-                        {
+                        foreach (KeyModel model in KeyModelCollection.Instance) {
                             sw.WriteLine(string.Format(
                                 "{0},{1},{2},{3},{4},{5},{6}",
                                 KeyInterop.VirtualKeyFromKey(model.Key),
@@ -115,12 +98,10 @@ namespace KeyViewer
                                 model.PressedFontForeground,
                                 model.ReleasedFontForeground));
                         }
-                        sw.WriteLine("{0} {1}", Config.WindowX, Config.WindowY);
+                        sw.WriteLine("{0} {1} {2}", Config.WindowX, Config.WindowY);
                     }
                 });
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 KeyModelCollection.Instance.Clear();
                 Console.Error.WriteLine(ex);
                 Console.Error.WriteLine("Error saving file");

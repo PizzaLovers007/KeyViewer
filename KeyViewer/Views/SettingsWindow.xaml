@@ -8,7 +8,7 @@
         xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
         Title="Key Viewer Settings"
-        Height="270"
+        Height="330"
         Width="450">
     <Window.Resources>
         <local:BrushToColorConverter x:Key="BrushToColorConverter" />

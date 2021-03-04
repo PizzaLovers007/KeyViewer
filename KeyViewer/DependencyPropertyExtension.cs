@@ -1,21 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace KeyViewer
 {
-    static class DependencyPropertyExtension
+    internal static class DependencyPropertyExtension
     {
         public static DependencyProperty Register(
             string name,
             Type propertyType,
             Type ownerType,
             object defaultValue,
-            PropertyChangedCallback propertyChangedCallback)
-        {
+            PropertyChangedCallback propertyChangedCallback) {
             return DependencyProperty.Register(name, propertyType, ownerType, new PropertyMetadata(defaultValue, propertyChangedCallback));
         }
 
@@ -23,8 +18,7 @@ namespace KeyViewer
             string name,
             Type propertyType,
             Type ownerType,
-            PropertyChangedCallback propertyChangedCallback)
-        {
+            PropertyChangedCallback propertyChangedCallback) {
             return DependencyProperty.Register(name, propertyType, ownerType, new PropertyMetadata(propertyChangedCallback));
         }
 
@@ -32,8 +26,7 @@ namespace KeyViewer
             string name,
             Type propertyType,
             Type ownerType,
-            object defaultValue)
-        {
+            object defaultValue) {
             return DependencyProperty.Register(name, propertyType, ownerType, new PropertyMetadata(defaultValue));
         }
     }
