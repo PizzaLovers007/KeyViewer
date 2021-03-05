@@ -20,17 +20,32 @@ namespace KeyViewer
             }
         }
 
+        private double _keySize;
+        public double KeySize {
+            get => _keySize;
+            set {
+                _keySize = value;
+                OnPropertyChanged();
+                OnPropertyChanged("KeySizeText");
+                SizeChanged();
+            }
+        }
+
         public KeyModel CurrModel => SelectedIndex != -1 ? KeyModels[SelectedIndex] : null;
         public bool IsSelecting => selectedIndex != -1;
+        public string KeySizeText => KeySize + "";
 
         public ICommand RemoveKeyCommand { get; set; }
+        public ICommand SizeChangedCommand { get; set; }
 
         public SettingsViewModel() {
             KeyModels = KeyModelCollection.Instance;
 
             RemoveKeyCommand = new Command(RemoveKey);
+            SizeChangedCommand = new Command(SizeChanged);
 
             SelectedIndex = -1;
+            KeySize = Config.Instance.KeySize;
         }
 
         public void AddKey(Key key) {
@@ -53,6 +68,10 @@ namespace KeyViewer
 
         public void Drop(IDropInfo dropInfo) {
             KeyModels.Move(KeyModels.IndexOf((KeyModel)dropInfo.Data), Math.Max(dropInfo.InsertIndex, 0));
+        }
+
+        public void SizeChanged() {
+            KeyModels.Size = KeySize;
         }
     }
 }

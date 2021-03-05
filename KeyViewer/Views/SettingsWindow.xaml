@@ -1,10 +1,10 @@
 ﻿<Window x:Class="KeyViewer.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:KeyViewer"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:KeyViewer"
         xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
         Title="Key Viewer Settings"
@@ -40,6 +40,7 @@
               Width="{Binding ActualWidth, ElementName=parentElementName}">
             <xctk:ColorPicker Width="100"
                               Height="24"
+                              Margin="0,60,0,0"
                               HorizontalAlignment="Right"
                               VerticalAlignment="Top"
                               FocusVisualStyle="{x:Null}"
@@ -47,7 +48,7 @@
                               IsEnabled="{Binding IsSelecting}" />
             <xctk:ColorPicker Width="100"
                               Height="24"
-                              Margin="0,30,0,0"
+                              Margin="0,90,0,0"
                               HorizontalAlignment="Right"
                               VerticalAlignment="Top"
                               FocusVisualStyle="{x:Null}"
@@ -55,7 +56,7 @@
                               IsEnabled="{Binding IsSelecting}" />
             <xctk:ColorPicker Width="100"
                               Height="24"
-                              Margin="0,60,0,0"
+                              Margin="0,120,0,0"
                               HorizontalAlignment="Right"
                               VerticalAlignment="Top"
                               FocusVisualStyle="{x:Null}"
@@ -63,7 +64,7 @@
                               IsEnabled="{Binding IsSelecting}" />
             <xctk:ColorPicker Width="100"
                               Height="24"
-                              Margin="0,90,0,0"
+                              Margin="0,150,0,0"
                               HorizontalAlignment="Right"
                               VerticalAlignment="Top"
                               FocusVisualStyle="{x:Null}"
@@ -71,7 +72,7 @@
                               IsEnabled="{Binding IsSelecting}" />
             <xctk:ColorPicker Width="100"
                               Height="24"
-                              Margin="0,120,0,0"
+                              Margin="0,180,0,0"
                               HorizontalAlignment="Right"
                               VerticalAlignment="Top"
                               FocusVisualStyle="{x:Null}"
@@ -79,7 +80,7 @@
                               IsEnabled="{Binding IsSelecting}" />
             <xctk:ColorPicker Width="100"
                               Height="24"
-                              Margin="0,150,0,0"
+                              Margin="0,210,0,0"
                               HorizontalAlignment="Right"
                               VerticalAlignment="Top"
                               FocusVisualStyle="{x:Null}"
@@ -102,29 +103,53 @@
                         IsEnabled="{Binding IsSelecting}"
                         Command="{Binding RemoveKeyCommand}" />
             </Grid>
-            <Label Content="Active Fill Color:"
+            <Label Content="Key Size:"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top" />
-            <Label Content="Inactive Fill Color:"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Margin="0,30,0,0" />
-            <Label Content="Active Outline Color:"
+            <Label Content="Active Fill Color:"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    Margin="0,60,0,0" />
-            <Label Content="Inactive Outline Color:"
+            <Label Content="Inactive Fill Color:"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    Margin="0,90,0,0" />
-            <Label Content="Active Text Color:"
+            <Label Content="Active Outline Color:"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    Margin="0,120,0,0" />
-            <Label Content="Inactive Text Color:"
+            <Label Content="Inactive Outline Color:"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    Margin="0,150,0,0" />
+            <Label Content="Active Text Color:"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="0,180,0,0" />
+            <Label Content="Inactive Text Color:"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="0,210,0,0" />
+            <Slider x:Name="sizeSlider"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top"
+                    Margin="61,6,28,0"
+                    ValueChanged="SizeSliderValueChanged"
+                    LostFocus="SizeSliderLostFocus"
+                    Value="{Binding KeySize}"
+                    IsSnapToTickEnabled="True"
+                    TickFrequency="2"
+                    Minimum="10"
+                    Maximum="200" />
+            <Label Content="{Binding KeySizeText}"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Top" />
         </Grid>
+        <Label x:Name="blankLabel"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               TabIndex="0"
+               Height="{Binding ActualHeight, ElementName=parentElementName}"
+               Width="{Binding ActualWidth, ElementName=parentElementName}" />
     </Grid>
 </Window>

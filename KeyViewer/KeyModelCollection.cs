@@ -28,6 +28,17 @@ namespace KeyViewer
         public KeyModel this[int index] => KeyModels[Indices[index]];
         public int Count => KeyModels.Count;
 
+        private double _size;
+        public double Size {
+            get => _size;
+            set {
+                _size = value;
+                foreach (KeyModel model in KeyModels.Values) {
+                    model.ViewSize = value;
+                }
+            }
+        }
+
         private KeyModelCollection() {
             KeyModels = new Dictionary<Key, KeyModel>();
             Indices = new List<Key>();
@@ -63,7 +74,10 @@ namespace KeyViewer
         }
 
         public bool Add(Key key) {
-            return Add(new KeyModel { Key = key });
+            return Add(new KeyModel {
+                Key = key,
+                ViewSize = Size,
+            });
         }
 
         public void Remove(Key key) {

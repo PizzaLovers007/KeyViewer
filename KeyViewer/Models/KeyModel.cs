@@ -96,6 +96,17 @@ namespace KeyViewer
             }
         }
 
+        private double size;
+
+        public double ViewSize {
+            get { return size; }
+            set {
+                size = value;
+                OnPropertyChanged();
+                OnPropertyChanged("ViewSize");
+            }
+        }
+
         public Brush Fill { get { return IsPressed ? PressedFill : ReleasedFill; } }
         public Brush Outline { get { return IsPressed ? PressedOutline : ReleasedOutline; } }
         public Brush FontForeground { get { return IsPressed ? PressedFontForeground : ReleasedFontForeground; } }

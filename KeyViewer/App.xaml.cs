@@ -1,14 +1,9 @@
-﻿using KeyViewer.Utils;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using KeyViewer.Utils;
 
 namespace KeyViewer
 {
@@ -65,14 +60,19 @@ namespace KeyViewer
                             });
                         }
                         double[] position = Array.ConvertAll(sr.ReadLine().Trim().Split(' '), double.Parse);
-                        Config.WindowX = position[0];
-                        Config.WindowY = position[1];
+                        Config.Instance.WindowX = position[0];
+                        Config.Instance.WindowY = position[1];
+                        if (position.Length > 2) {
+                            Config.Instance.KeySize = position[2];
+                            KeyModelCollection.Instance.Size = Config.Instance.KeySize;
+                        }
                     }
                 });
             } catch (Exception ex) {
                 KeyModelCollection.Instance.Clear();
-                Config.WindowX = 50;
-                Config.WindowY = 50;
+                Config.Instance.WindowX = 50;
+                Config.Instance.WindowY = 50;
+                Config.Instance.KeySize = 100;
                 Console.Error.WriteLine(ex);
                 Console.Error.WriteLine("Error loading file");
                 File.Delete(settingsPath);
@@ -98,7 +98,11 @@ namespace KeyViewer
                                 model.PressedFontForeground,
                                 model.ReleasedFontForeground));
                         }
-                        sw.WriteLine("{0} {1} {2}", Config.WindowX, Config.WindowY);
+                        sw.WriteLine(
+                            "{0} {1} {2}",
+                            Config.Instance.WindowX,
+                            Config.Instance.WindowY,
+                            Config.Instance.KeySize);
                     }
                 });
             } catch (Exception ex) {

@@ -39,5 +39,15 @@ namespace KeyViewer
                 viewModel.AddKey(dialog.Key);
             }
         }
+
+        private void SizeSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            if (viewModel != null) {
+                viewModel.KeySize = e.NewValue;
+            }
+        }
+
+        private void SizeSliderLostFocus(object sender, RoutedEventArgs e) {
+            Config.Instance.KeySize = sizeSlider.Value;
+        }
     }
 }

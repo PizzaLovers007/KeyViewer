@@ -1,14 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KeyViewer
+﻿namespace KeyViewer
 {
-    class Config
+    internal class Config
     {
-        public static double WindowX { get; set; }
-        public static double WindowY { get; set; }
+        private static Config _instance;
+        public static Config Instance {
+            get {
+                if (_instance == null) {
+                    _instance = new Config();
+                }
+                return _instance;
+            }
+        }
+
+        public double WindowX { get; set; } = 50;
+        public double WindowY { get; set; } = 50;
+        public double KeySize { get; set; } = 100;
+
+        private Config() { }
     }
 }

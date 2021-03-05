@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace KeyViewer
@@ -20,8 +21,8 @@ namespace KeyViewer
 
             KeyModels = KeyModelCollection.Instance;
 
-            Left = Config.WindowX;
-            Top = Config.WindowY;
+            Left = Config.Instance.WindowX;
+            Top = Config.Instance.WindowY;
 
             settingsWindow = new SettingsWindow();
 
@@ -44,8 +45,8 @@ namespace KeyViewer
         protected override void OnLocationChanged(EventArgs e) {
             base.OnLocationChanged(e);
 
-            Config.WindowX = Left;
-            Config.WindowY = Top;
+            Config.Instance.WindowX = Left;
+            Config.Instance.WindowY = Top;
         }
     }
 }

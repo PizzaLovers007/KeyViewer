@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -44,6 +45,14 @@ namespace KeyViewer
                 Brushes.White,
                 new PropertyChangedCallback((d, e) => (d as KeyView)?.FontForegroundChanged(d, e)));
 
+        public static DependencyProperty ViewSizeProperty =
+            DependencyPropertyExtension.Register(
+                "ViewSize",
+                typeof(double),
+                typeof(KeyView),
+                100.0,
+                new PropertyChangedCallback((d, e) => (d as KeyView)?.ViewSizeChanged(d, e)));
+
         #endregion Dependency Properties
 
         #region Properties
@@ -66,6 +75,11 @@ namespace KeyViewer
         public Brush FontForeground {
             get { return (Brush)GetValue(FontForegroundProperty); }
             set { SetValue(FontForegroundProperty, value); }
+        }
+
+        public double ViewSize {
+            get { return (double)GetValue(ViewSizeProperty); }
+            set { SetValue(ViewSizeProperty, value); }
         }
 
         #endregion Properties
@@ -111,6 +125,17 @@ namespace KeyViewer
             if (!e.NewValue?.Equals(e.OldValue) ?? false) {
                 Brush foreground = (Brush)e.NewValue;
                 label.Foreground = foreground;
+            }
+        }
+
+        private void ViewSizeChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) {
+            if (!e.NewValue?.Equals(e.OldValue) ?? false) {
+                double size = (double)e.NewValue;
+                grid.MinWidth = size;
+                grid.MinHeight = size;
+                rectangle.StrokeThickness = size * 3 / 100;
+                label.FontSize = Math.Max(1, size / 2);
+                Margin = new Thickness(size / 10, 0, 0, 0);
             }
         }
     }

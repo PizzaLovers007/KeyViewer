@@ -5,19 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KeyViewer"
         mc:Ignorable="d"
-        Title="Key Viewer" SizeToContent="WidthAndHeight" AllowsTransparency="True" WindowStyle="None" Topmost="True">
+        Title="Key Viewer"
+        SizeToContent="WidthAndHeight"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        Topmost="True">
     <Window.Background>
-        <SolidColorBrush Color="Black" Opacity="0.01" />
+        <SolidColorBrush Color="Black"
+                         Opacity="0.01" />
     </Window.Background>
 
-    <ItemsControl ItemsSource="{Binding KeyModels}">
+    <ItemsControl ItemsSource="{Binding KeyModels}"
+                  x:Name="itemsControl">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <StackPanel Orientation="Horizontal"
-                        x:Name="stackPanel">
+                <StackPanel Orientation="Horizontal">
                     <StackPanel.Resources>
                         <Style TargetType="{x:Type local:KeyView}">
-                            <Setter Property="Margin" Value="10,0,0,0" />
+                            <Setter Property="Margin"
+                                    Value="10,0,0,0" />
                         </Style>
                     </StackPanel.Resources>
                 </StackPanel>
@@ -25,7 +31,11 @@
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <local:KeyView Key="{Binding Key}" Fill="{Binding Fill}" Outline="{Binding Outline}" FontForeground="{Binding FontForeground}" />
+                <local:KeyView Key="{Binding Key}"
+                               Fill="{Binding Fill}"
+                               Outline="{Binding Outline}"
+                               FontForeground="{Binding FontForeground}"
+                               ViewSize="{Binding ViewSize}" />
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>
